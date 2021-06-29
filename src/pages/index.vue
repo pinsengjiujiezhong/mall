@@ -1,14 +1,12 @@
 <template>
   <div>
-    <nav-header></nav-header>
-    <router-view></router-view>
-    <nav-fooder></nav-fooder>
+    index
   </div>
 </template>
 
 <script>
 export default {
-name: "index"
+  name: "index"
 }
 </script>
 
