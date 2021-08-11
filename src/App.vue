@@ -14,4 +14,5 @@ export default {
 
 <style lang="scss">
 @import "./assets/scss/reset.scss";
+@import "./assets/scss/mixin.scss";
 </style>

@@ -9,7 +9,7 @@ import Order from '../pages/order'
 import OrderConfirm from '../pages/orderConfirm'
 import OrderList from '../pages/orderList'
 import OrderPay from '../pages/orderPay'
-import Product from '../pages/product'
+import Product from '../pages/product1'
 import Alipay from '../pages/alipay'
 
 Vue.use(VueRouter);
@@ -19,14 +19,9 @@ export default new VueRouter({
         {
             path: '/',
             name: 'home',
-            // redirect: '/index',
             component: Home,
             children: [
                 {
-                    path: '/login',
-                    name: 'login',
-                    component: Login
-                }, {
                     path: '/index',
                     name: 'index',
                     component: Index
@@ -35,15 +30,19 @@ export default new VueRouter({
                     name: 'product',
                     component: Product,
                 }, {
-                    path: '/cart',
-                    name: 'cart',
-                    component: Cart
-                }, {
                     path: '/detail',
                     name: 'detail',
                     component: Detail
                 }
             ]
+        },{
+            path: '/login',
+            name: 'login',
+            component: Login
+        }, {
+            path: '/cart',
+            name: 'cart',
+            component: Cart
         }, {
             path: '/order',
             name: 'order',

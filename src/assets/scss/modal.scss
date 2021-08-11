@@ -1,0 +1,46 @@
+@import "./mixin.scss";
+.modal{
+  @include position(fixed);
+  z-index: 9;
+  transition: all .5s;
+  &.modal-enter-active{
+    top: 0;
+  }
+  &.modal-leave-active{
+    top: -100%
+  }
+  &.modal-enter{
+    top: -100%;
+  }
+  .mask{
+    @include position(fixed);
+    background-color: $colorI;
+    opacity: .5;
+  }
+  .modal-dialog{
+    @include position(absolute, 40%, 50%,660px, auto);
+    transform: translate(-50%, -50%);
+    background-color: $colorG;
+    .modal-header{
+      background-color: $colorH;
+      font-size: $fontI;
+      line-height:60px;
+      padding-left: 28px;
+      .icon-close{
+        @include positionImg(absolute, 23px, 30px, 14px, 14px, '/imgs/icon-close.png');
+        transition: .3s;
+        &:hover{
+          transform:scale(1.5)
+        }
+      }
+    }
+    .modal-body{
+      padding: 60px;
+    }
+    .modal-footer{
+      line-height: 60px;
+      text-align: center;
+
+    }
+  }
+}
