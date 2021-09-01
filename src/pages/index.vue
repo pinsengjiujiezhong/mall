@@ -72,7 +72,7 @@
                 <div class="item-info">
                   <h3>{{ item.name }}</h3>
                   <p class="item-desc">{{ item.subtitle }}</p>
-                  <p class="price" @click="addCart"><span>{{ item.price }}</span>元</p>
+                  <p class="price" @click="addCart(item.id)"><span>{{ item.price }}</span>元</p>
                 </div>
               </div>
             </div>
@@ -213,14 +213,18 @@
           console.log('this.productList: ', this.productList)
         })
       },
-      addCart() {
-        this.showModalChance()
+      addCart(id) {
+        this.axios.post('/carts', {
+          productId: id,
+          selected: true
+        }).then((res) => {
+          this.showModal = !this.showModal
+          this.$store.state.cartCount = res.cartTotalQuantity
+          this.$router.push('/cart')
+        })
         console.log('添加购物车')
       },
-      showModalChance() {
-        console.log('调用了showModalChance方法')
-        this.showModal = !this.showModal
-      },
+
       goMyCart() {
         this.$router.push('/cart')
       }

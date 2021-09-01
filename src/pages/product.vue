@@ -68,7 +68,6 @@
     }
 </script>
 <style lang="scss">
-    /*
     @import './../assets/scss/mixin.scss';
     .product{
         .content{
@@ -155,26 +154,6 @@
                         opacity:.4;
                         z-index:10;
                     }
-                    @keyframes slideDown{
-                        from{
-                            top:-50%;
-                            opacity:0;
-                        }
-                        to{
-                            top:50%;
-                            opacity:1;
-                        }
-                    }
-                    @keyframes slideUp{
-                        from{
-                            top:50%;
-                            opacity:1;
-                        }
-                        to{
-                            top:-50%;
-                            opacity:0;
-                        }
-                    }
                     .video{
                         position:fixed;
                         top:-50%;
@@ -183,7 +162,7 @@
                         z-index:10;
                         width:1000px;
                         height:536px;
-                        opacity:1;
+                        opacity: 0;
                         &.slideDown{
                             animation:slideDown .6s linear;
                             top:50%;
@@ -213,5 +192,4 @@
             margin-left:10px;
         }
     }
-    */
 </style>

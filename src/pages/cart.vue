@@ -1,13 +1,25 @@
+
 <template>
-  <div></div>
+  <div>
+    <NavHeader></NavHeader>
+    cart
+    <router-view></router-view>
+    <NavFooter></NavFooter>
+  </div>
 </template>
 
 <script>
-export default {
-name: "cart"
-}
+  import NavHeader from '../components/NavHeader'
+  import NavFooter from '../components/NavFooter'
+  export default {
+    name: "cart",
+    components: {
+      NavHeader,
+      NavFooter
+    }
+  }
 </script>
 
-<style scoped>
+<style lang="scss">
 
 </style>

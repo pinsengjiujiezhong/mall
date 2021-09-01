@@ -2,7 +2,7 @@
     <div class="nav-bar" :class="{'is_fixed':isFixed}">
         <div class="container">
             <div class="pro-title">
-                <a href="javascript:;">小米8</a>
+                <a href="javascript:;">{{title}}</a>
             </div>
             <div class="pro-param">
                 <a href="javascript:;">概述</a><span>|</span>
@@ -17,6 +17,9 @@
 <script>
 export default {
     name: "ProductParam",
+    props: {
+        title: String
+    },
     data() {
         return {
             isFixed: false
@@ -42,6 +45,7 @@ export default {
     @import './../assets/scss/mixin';
     @import './../assets/scss/config';
     .nav-bar{
+        z-index: 10;
         width: 1226px;
         height: 70px;
         width: 100%;

@@ -157,8 +157,7 @@ export default {
           pageSize: 6
         }
       }).then((res) => {
-        const result = res.data.data
-        this.phoneList = result.list
+        this.phoneList = res.list
         console.log('this.phoneList: ', this.phoneList)
       })
     },

@@ -1,14 +1,14 @@
 <template>
   <div class="product">
-    <product-param title="小米9">
+    <product-param :title="product.name">
       <template v-slot:buy>
-        <button class="btn">立即购买</button>
+        <button class="btn" @click="buyProduct">立即购买</button>
       </template>
     </product-param>
     <div class="content">
       <div class="item-bg">
-        <h2>小米9</h2>
-        <h3>小米9 战斗天使</h3>
+        <h2>{{product.name}}</h2>
+        <h3>{{product.subtitle}}</h3>
         <p>
           <a href="" id="2">全球首款双频 GP</a>
           <span>|</span>
@@ -19,7 +19,7 @@
           <a href="" id="7">红外人脸识别</a>
         </p>
         <div class="price">
-          <span>￥<em>2599</em></span>
+          <span>￥<em>{{product.price}}</em></span>
         </div>
       </div>
       <div class="item-bg-2"></div>
@@ -27,7 +27,6 @@
       <div class="item-swiper">
         <swiper>
           <swiper-slide><img src="/imgs/product/gallery-6.jpg" alt=""></swiper-slide>
-          <!-- Optional controls -->
           <div class="swiper-pagination"></div>
         </swiper>
         <p class="desc">小米8 AI变焦双摄拍摄</p>
@@ -35,11 +34,11 @@
       <div class="item-video">
         <h2>60帧超慢动作摄影<br/>慢慢回味每一瞬间的精彩</h2>
         <p>后置960帧电影般超慢动作视频，将眨眼间的美妙展现得淋漓尽致！<br/>更能AI 精准分析视频内容，15个场景智能匹配背景音效。</p>
-        <div class="video-bg"></div>
-        <div class="video-box">
+        <div class="video-bg" @click="showSlide=true"></div>
+        <div class="video-box" v-if="showSlide">
           <div class="overlay"></div>
-          <div class="video">
-            <span class="icon-close"></span>
+          <div class="video" :class="showSlide ? 'slide' : ''">
+            <span class="icon-close" @click="showSlide=false"></span>
             <video src="/imgs/product/video.mp4" muted autoplay controls="controls"></video>
           </div>
         </div>
@@ -54,7 +53,8 @@
     name: 'product',
     data() {
       return {
-
+        product: {},
+        showSlide: false
       }
     },
     components: {
@@ -62,8 +62,20 @@
       swiperSlide,
       ProductParam
     },
+    mounted(){
+      this.getProduct()
+    },
     methods: {
-
+      buyProduct() {
+        let id = this.$route.params.id
+        this.$router.push(`/detail/${id}`)
+      },
+      getProduct() {
+        let id = this.$route.params.id
+        this.axios.get(`products/${id}`).then((res) => {
+          this.product = res
+        })
+      }
     }
   }
 </script>
@@ -138,6 +150,51 @@
               p{
                   font-size:24px;
                   margin-bottom:58px;
+              }
+            .video-bg{
+              background:url('/imgs/product/gallery-1.png') no-repeat center;
+              background-size:cover;
+              width:1226px;
+              height:540px;
+              margin:0 auto 120px;
+              cursor:pointer;
+            }
+              .video-box{
+                .overlay{
+                  @include position(fixed);
+                  background-color:#333333;
+                  opacity: .4;
+                  z-index:10;
+                }
+                .video{
+                  width: 1000px;
+                  height: 536px;
+                  position: fixed;
+                  top: -50%;
+                  left: 50%;
+                  z-index:10;
+                  transform: translate(-50%, -50%);
+                  opacity: 0;
+                  transition: all 1s;
+                  &.slide{
+                    opacity: 1;
+                    top: 50%;
+                  }
+                  video{
+                    width: 100%;
+                    height: 100%;
+                    object-fit:cover;
+                    outline:none;
+                  }
+                  .icon-close{
+                    position:absolute;
+                    top:20px;
+                    right:20px;
+                    @include bgImg('/imgs/icon-close.png', 20px,20px);
+                    cursor:pointer;
+                    z-index:11;
+                  }
+                }
               }
           }
       }
