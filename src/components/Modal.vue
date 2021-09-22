@@ -5,7 +5,7 @@
             <div class="modal-dialog">
                 <div class="modal-header">
                     <span>{{title}}</span>
-                    <a href="javascript:;" class="icon-close" @click="canceDialog"></a>
+                    <a href="javascript:;" class="icon-close" @click="$emit('close')"></a>
                 </div>
                 <div class="modal-body">
                     <slot name="body" ></slot>
@@ -15,7 +15,7 @@
                     <a href="javascript:;" class="btn" @click="canceDialog" v-if="btnType==2">{{cancelText}}</a>
                     <div class="btn-group" v-if="btnType==3">
                         <a href="javascript:;" class="btn" @click="$emit('submit')">{{sureText}}</a>
-                        <a href="javascript:;" class="btn" @click="canceDialog">{{cancelText}}</a>
+                        <a href="javascript:;" class="btn btn-default" @click="$emit('close')">{{cancelText}}</a>
                     </div>
                 </div>
             </div>
@@ -42,17 +42,6 @@
             cancelText: {
                 type: String,
                 default: '取消'
-            }
-            // showModalChance: {
-            //     type: Function,
-            //     default: null
-            // }
-        },
-        methods: {
-            canceDialog() {
-                console.log('调用了canceDialog方法')
-                // this.$emit('showModalChance')
-                this.$parent.showModalChance()
             }
         }
     }

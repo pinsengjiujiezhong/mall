@@ -31,3 +31,10 @@
   background-size: contain;
   content: ' ';
 }
+@mixin border($bw:1px,$bc:$colorF,$bs:solid) {
+  border: $bw $bs $bc;
+}
+@mixin height($h:0,$lh:$h) {
+  height: $h;
+  line-height: $lh;
+}

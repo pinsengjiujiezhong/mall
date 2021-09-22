@@ -10,8 +10,9 @@
         </div>
         <div class="user">
           <a href="javascript:;" v-if="username">{{username}}</a>
-          <a href="javascript:;" v-else @click="login">登录</a>
-          <a href="javascript:;" v-if="username">我的订单</a>
+          <a href="javascript:;" v-if="!username" @click="login">登录</a>
+          <a href="javascript:;" v-if="username" @click="logout">退出</a>
+          <a href="/#/order/list" v-if="username">我的订单</a>
           <a href="javascript:;" v-else>注册</a>
           <a href="javascript:;" class="my-cart" @click="cart"><span class="icon-cart"></span>购物车(<span>{{cartCount}}</span>)</a>
         </div>
@@ -147,6 +148,7 @@ export default {
   mounted(){
     console.log('执行了')
     this.getProductList()
+    this.getCartCount()
     console.log('username: ', this.username)
   },
   methods: {
@@ -166,6 +168,18 @@ export default {
     },
     login() {
       this.$router.push('/login')
+    },
+    logout() {
+      this.axios.post('/user/logout').then(() => {
+        this.$message({
+          message: '退出成功',
+          type: 'success'
+        });
+        this.$router.push('/login')
+        this.$cookies.set('userId', '', {expires: '-1'})
+        this.cartCount = 0
+        this.username = ''
+      })
     }
   }
 }
@@ -213,37 +227,7 @@ export default {
         position: relative;
         height: 112px;
         @include flex();
-        .header-logo {
-          width: 55px;
-          height: 55px;
-          background-color: #FF6600;
-          a{
-            display: inline-block;
-            width: 110px;
-            height: 55px;
-            &:before{
-              content: ' ';
-              display: inline-block;
-              width: 55px;
-              height: 55px;
-              background: url("/imgs/mi-logo.png") no-repeat center;
-              background-size: contain;
-              transition: margin .5s;
-            }
-            &:after{
-              content: ' ';
-              display: inline-block;
-              width: 55px;
-              height: 55px;
-              background: url("/imgs/mi-home.png") no-repeat center;
-              background-size: contain;
-            }
-            &:hover:before{
-              margin-left: -55px;
-              transition: margin .5s;
-            }
-          }
-        }
+
         .header-menu{
           display: inline-block;
           margin-left: 209px;

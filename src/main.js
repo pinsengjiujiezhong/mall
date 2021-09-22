@@ -7,9 +7,12 @@ import VueAxios from 'vue-axios'
 import { Message } from 'element-ui'
 import VueLazyLoad from 'vue-lazyload'
 import VueCookies from 'vue-cookies'
+import ElementUI from 'element-ui';
+import 'element-ui/lib/theme-chalk/index.css';
 
 Vue.config.productionTip = false
 
+Vue.use(ElementUI);
 // axios.defaults.baseURL = 'https://www.easy-mock.com/mock/5dc7afee2b69d9223b633cbb/mimall';
 axios.defaults.baseURL = '/api';
 axios.defaults.timeout = 8000;

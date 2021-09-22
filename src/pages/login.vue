@@ -54,7 +54,8 @@
                 }).then((res) => {
                     console.log(res)
                     this.$cookies.set('userId', res.id, '1M')
-                    this.$router.push('/')
+                    this.$store.state.username = res.username
+                    this.$router.push('/index')
                 })
             },
             register() {
